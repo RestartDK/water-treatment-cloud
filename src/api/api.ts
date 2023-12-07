@@ -21,6 +21,5 @@ export const getValveState = async (deviceId: string, status: string): Promise<V
 }
 
 export const changeValveState = async (deviceId: string, status: string): Promise<void> => {
-    const url = `https://valve-connector.azurewebsites.net/api/httpTriggerTest/?deviceId=${deviceId}&status=${status}`;
-    await axios.post(url);
+    await axios.post(`https://valve-connector.azurewebsites.net/api/httpTriggerTest/?deviceId=`, { deviceId, status})
 }
