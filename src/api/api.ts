@@ -1,25 +1,24 @@
 import axios from "axios";
-import { ValveState } from "../lib/types";
+import { ValveDevicesResponse, ValveStatusResponse } from "../lib/types";
 
 const api = axios.create({
 	baseURL: "https://valve-connector.azurewebsites.net/api/",
 });
 
-// TODO: make this api in azure functions
-export const getValveCollection = async (): Promise<ValveState[]> => {
-    const res = await api.get("httpTriggerTest");
+export const getAllValves = async (): Promise<ValveDevicesResponse> => {
+    const res = await api.get("getAllValves");
     return res.data;
 }
 
-// TODO: make this api in azure functions
-export const getValveState = async (deviceId: string, status: string): Promise<ValveState> => {
-    const res = await api.post("httpTriggerTest", {
-        deviceId,
-        status,
-    });
+export const createValve = async (deviceId: string): Promise<void> => {
+    await api.post(`createValve?deviceId=${deviceId}`);
+}
+
+export const getValveState = async (deviceId: string): Promise<ValveStatusResponse> => {
+    const res = await api.get(`getValveState?deviceId=${deviceId}`);
     return res.data;
 }
 
-export const changeValveState = async (deviceId: string, status: string): Promise<void> => {
-    await axios.post(`https://valve-connector.azurewebsites.net/api/httpTriggerTest/?deviceId=`, { deviceId, status})
+export const setValveState = async (deviceId: string, status: string): Promise<void> => {
+    await api.post(`setValveState?deviceId=${deviceId}&status=${status}`);
 }
