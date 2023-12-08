@@ -1,9 +1,8 @@
-import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getAllValves } from "@/api/api";
 import ValveComponent from "./ValveComponent";
 
 export default function Dashboard() {
-	const queryClient = useQueryClient();
 	const { data, isLoading, error } = useQuery({ queryKey: ['valves'], queryFn: () => getAllValves() });
     console.log("My data: ", data);
 

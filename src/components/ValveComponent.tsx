@@ -1,4 +1,4 @@
-import { Valve, ValveState } from "@/lib/types";
+import { Valve, ValveStatus } from "@/lib/types";
 import { Button } from "./ui/button";
 import { getValveState, setValveState } from "@/api/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -7,23 +7,18 @@ interface ValveComponentProps {
     deviceId: string;
 }
 
-export interface ValveStatusResponse {
-    status: ValveState;
-}
-
 export default function ValveComponent({ deviceId }: ValveComponentProps) {
     const queryClient = useQueryClient();
 	const { data, isLoading, error } = useQuery({ queryKey: ['valvestate', deviceId], queryFn: () => getValveState(deviceId) });
 
     console.log("Valve state data: ", data);
-    const status = data?.reportedProperties.status;
 
     const mutation = useMutation({
 		mutationFn: ({deviceId, status}: Valve) => {
 			return setValveState(deviceId, status);
 		},
-        onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['valvestate', deviceId]});
+        onSuccess: (data) => {
+            queryClient.setQueryData(['valvestate', deviceId], data);
         },
         onError: (error) => {
             // Handle error
@@ -31,7 +26,7 @@ export default function ValveComponent({ deviceId }: ValveComponentProps) {
         },  
 	});
 
-	const onSubmit = (status: ValveState) => {
+	const onSubmit = (status: ValveStatus) => {
 		mutation.mutate({deviceId, status});
 	};
 
@@ -59,6 +54,9 @@ export default function ValveComponent({ deviceId }: ValveComponentProps) {
         );
     }
 
+    // Destructure 'status' from 'data'
+    const { status } = data;
+    
 	return (
         <div className="w-full">
             {status && (
