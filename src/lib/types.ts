@@ -1,17 +1,18 @@
-export type ValveState = "on" | "off";
+export type ValveStatus = "on" | "off";
 
 export type Valve = {
 	deviceId: string;
-	status: ValveState;
+	status: ValveStatus;
 };
+
 export interface ValveStatusResponse {
+    status: ValveStatus;
+}
+export interface DeviceReportePropertiesResponse {
 	reportedProperties: {
-		status: ValveState;
+		status: ValveStatus;
 		$metadata: {
 			$lastUpdated: string;
-			isOn: {
-				$lastUpdated: string;
-			};
 			status: {
 				$lastUpdated: string;
 			};
@@ -20,7 +21,7 @@ export interface ValveStatusResponse {
 	};
 }
 
-export type ValveDevice = {
+export interface ValveDevice {
 	deviceId: string;
 	generationId: string;
 	etag: string;
@@ -48,7 +49,7 @@ export type ValveDevice = {
 			secondaryKey: string;
 		};
 	};
-};
+}
 
 // Then, for the API call, you'd expect an array of these:
 export type ValveDevicesResponse = ValveDevice[];
