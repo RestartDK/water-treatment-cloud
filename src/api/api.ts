@@ -19,6 +19,7 @@ export const getValveState = async (deviceId: string): Promise<ValveStatusRespon
     return res.data;
 }
 
-export const setValveState = async (deviceId: string, status: string): Promise<void> => {
-    await api.post(`setValveState?deviceId=${deviceId}&status=${status}`);
+export const setValveState = async (deviceId: string, status: string): Promise<ValveStatusResponse> => {
+    const res = await api.post(`setValveState?deviceId=${deviceId}&status=${status}`);
+    return res.data;
 }
