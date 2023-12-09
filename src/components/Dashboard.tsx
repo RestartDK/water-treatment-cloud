@@ -32,9 +32,14 @@ export default function Dashboard() {
 
 	return (
         <div className="w-full flex flex-col">
-            {data.map((device) => (
-                <ValveComponent deviceId={device.deviceId} />
-            ))}
+            <div className="flex">
+                <h1 className="text-3xl font-bold p-4">Your Valves</h1>
+            </div>
+            <div className="flex flex-col justify-end">
+                {data.map((device) => (
+                    <ValveComponent deviceId={device.deviceId} />
+                ))}
+            </div>
         </div>
     );
 }

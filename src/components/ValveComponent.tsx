@@ -2,6 +2,7 @@ import { Valve, ValveStatus } from "@/lib/types";
 import { Button } from "./ui/button";
 import { getValveState, setValveState } from "@/api/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Circle } from "lucide-react";
 
 interface ValveComponentProps {
     deviceId: string;
@@ -61,8 +62,9 @@ export default function ValveComponent({ deviceId }: ValveComponentProps) {
         <div className="w-full">
             {status && (
                 <div className="flex flex-row justify-center items-center gap-4 p-4">
-                    <h1>{deviceId}</h1>
+                    <h1 className="font-bold">{deviceId}</h1>
                     <p>Current Status: {status}</p>
+                    {status === "on" ? <Circle color="#008000" /> : <Circle color="#FF0000" />}
                     <Button onClick={() => onSubmit("on")}>Turn on</Button>
                     <Button onClick={() => onSubmit("off")}>Turn off</Button>
                 </div>
