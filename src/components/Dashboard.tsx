@@ -4,7 +4,6 @@ import ValveComponent from "./ValveComponent";
 
 export default function Dashboard() {
 	const { data, isLoading, error } = useQuery({ queryKey: ['valves'], queryFn: () => getAllValves() });
-    console.log("My data: ", data);
 
 	if (isLoading) {
 		return (
