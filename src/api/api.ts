@@ -23,3 +23,7 @@ export const setValveState = async (deviceId: string, status: string): Promise<V
     const res = await api.post(`setValveState?deviceId=${deviceId}&status=${status}`);
     return res.data;
 }
+
+export const scheduleValveStatus = async (deviceId: string, status: string, targetTime: string): Promise<void> => {
+    await api.post(`scheduleValveStatus?deviceId=${deviceId}&status=${status}&targetTime=${targetTime}`);
+}
