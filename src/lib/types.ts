@@ -5,6 +5,12 @@ export type Valve = {
 	status: ValveStatus;
 };
 
+export type ScheduleValve= {
+	deviceId: string;
+	status: ValveStatus;
+	targetTime: string;
+};
+
 export interface ValveStatusResponse {
     status: ValveStatus;
 }
