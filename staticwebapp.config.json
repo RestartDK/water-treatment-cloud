@@ -1,0 +1,18 @@
+{
+	"routes": [
+		{
+			"route": "/",
+			"allowedRoles": ["custom"]
+		},
+        {
+            "route": "/logout",
+            "redirect": "/.auth/logout"
+        }
+	],
+    "responseOverrides": {
+        "401": {
+            "statusCode": 302,
+            "redirect": "/.auth/login/github"
+        }
+    }
+}
