@@ -78,7 +78,7 @@ export default function ValveComponent({ deviceId }: ValveComponentProps) {
 	const { status } = data;
 
 	return (
-		<div className="w-full border-2">
+		<div className="w-full">
 			{status && (
 				<div className="flex md:flex-row flex-col justify-evenly gap-4 p-4">
 					<div className="flex md:flex-row flex-col gap-2 items-center">
@@ -96,7 +96,10 @@ export default function ValveComponent({ deviceId }: ValveComponentProps) {
 							<Button onClick={() => onSubmitValveStatus("off")}>Turn off</Button>
 						</div>
 					</div>
-					<DateTimePicker date={date} setDate={setDate} onTurnOn={handleTurnOn} onTurnOff={handleTurnOff} />
+					<div className="flex justify-center">
+						<DateTimePicker date={date} setDate={setDate} onTurnOn={handleTurnOn} onTurnOff={handleTurnOff} />
+					</div>
+					
 				</div>
 			)}
 		</div>
