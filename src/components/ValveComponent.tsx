@@ -80,19 +80,21 @@ export default function ValveComponent({ deviceId }: ValveComponentProps) {
 	return (
 		<div className="w-full border-2">
 			{status && (
-				<div className="flex md:flex-row flex-col justify-center items-center gap-4 p-4">
-					<h1 className="font-bold">{deviceId}</h1>
-					<div className="flex flex-row items-center">
-						<p className="pr-2">Current Status</p>
-						{status === "on" ? (
-							<Circle color="#008000" />
-						) : (
-							<Circle color="#FF0000" />
-						)}
-					</div>
-					<div className="flex flex-row gap-2">
-						<Button onClick={() => onSubmitValveStatus("on")}>Turn on</Button>
-						<Button onClick={() => onSubmitValveStatus("off")}>Turn off</Button>
+				<div className="flex md:flex-row flex-col justify-evenly gap-4 p-4">
+					<div className="flex md:flex-row flex-col gap-2 items-center">
+						<h1 className="font-bold">{deviceId}</h1>
+						<div className="flex flex-row">
+							<p className="pr-2">Current Status</p>
+							{status === "on" ? (
+								<Circle color="#008000" />
+							) : (
+								<Circle color="#FF0000" />
+							)}
+						</div>
+						<div className="flex flex-row gap-2">
+							<Button onClick={() => onSubmitValveStatus("on")}>Turn on</Button>
+							<Button onClick={() => onSubmitValveStatus("off")}>Turn off</Button>
+						</div>
 					</div>
 					<DateTimePicker date={date} setDate={setDate} onTurnOn={handleTurnOn} onTurnOff={handleTurnOff} />
 				</div>
