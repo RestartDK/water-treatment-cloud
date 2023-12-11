@@ -6,6 +6,7 @@ import { Circle } from "lucide-react";
 import toast from "react-hot-toast";
 import { DateTimePicker } from "./ui/datetimepicker";
 import { useState } from "react";
+import { DateTime } from "luxon";
 
 interface ValveComponentProps {
 	deviceId: string;
@@ -51,14 +52,24 @@ export default function ValveComponent({ deviceId }: ValveComponentProps) {
 	};
 
 	const handleTurnOn = (selectedDate: Date) => {
-		const targetTime = selectedDate.toISOString();
-        console.log("Target time: ", targetTime);
+		const localDateTime = DateTime.fromJSDate(selectedDate);
+		const targetTime = localDateTime.toUTC().toISO();
+		if (targetTime === null) {
+			toast.error("Invalid date provided");
+			return;
+		}
+		console.log("Target time (UTC): ", targetTime);
 		mutationScheduleValveStatus.mutate({ deviceId, status: "on", targetTime });
 	};
-
+	
 	const handleTurnOff = (selectedDate: Date) => {
-		const targetTime = selectedDate.toISOString();
-        console.log("Target time: ", targetTime);
+		const localDateTime = DateTime.fromJSDate(selectedDate);
+		const targetTime = localDateTime.toUTC().toISO();
+		if (targetTime === null) {
+			toast.error("Invalid date provided");
+			return;
+		}
+		console.log("Target time (UTC): ", targetTime);
 		mutationScheduleValveStatus.mutate({ deviceId, status: "off", targetTime });
 	};
 
