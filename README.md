@@ -1,6 +1,7 @@
 # Water Treatment Cloud Project
 
 ## 📖 Project Overview
+![image](https://github.com/RestartDK/water-treatment-cloud/assets/58006998/9720b1cc-1743-4cc5-a8df-d74436676129)
 
 The Valve Management System is designed to efficiently monitor and control valve operations remotely. This project aims to provide a seamless interface for managing valve states, scheduling valve operations, and monitoring real-time statuses, enhancing operational efficiency and reliability in fluid control systems.
 
